@@ -1,0 +1,6 @@
+/learn/
+/venv/
+/test.mmd
+.env*
+.cache*
+
