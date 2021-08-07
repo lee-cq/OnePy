@@ -6,12 +6,18 @@
 @Date-Time  : 2021/8/3 23:35
 """
 import json
+
+from common import PathCompress
 from config import FILE_CONF_JSON
 
 
 def get_conf(key: str, file=FILE_CONF_JSON) -> [dict, str, int, float, bool, None]:
     """从配置文件中拿取一个配置"""
-    conf_dict = json.loads(file.read_text())
+    file = PathCompress(file)
+    conf_dict = json.loads(file.read_conf())
+    if key == '*':  # 允许查询全部的内容
+        return conf_dict
+
     _m_key = key.split('.')
     _value = conf_dict
 
@@ -41,10 +47,12 @@ def set_conf(key, value, file=FILE_CONF_JSON):
             return _dict
         else:
             return _value
-
-    conf_dict = json.loads(file.read_text())
+    file = PathCompress(file)
+    conf_dict = json.loads(file.read_conf())
     new_conf = _set_conf(key, value, conf_dict)
-    file.write_text(json.dumps(new_conf, ensure_ascii=False, default=json_default_replace, indent=2))
+    return file.write_conf(
+        json.dumps(new_conf, ensure_ascii=False, default=json_default_replace, indent=2)
+        )
 
 
 if __name__ == '__main__':

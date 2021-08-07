@@ -6,4 +6,14 @@
 @Date-Time  : 2021/8/4 19:04
 """
 
-class OneExp
+
+class OneException(Exception):
+    """Base Exception """
+
+
+class DiskErrorBase(OneException):
+    """ Disk对象Error"""
+
+
+class ItemErrorBase(OneException):
+    """Item对象基础错误"""

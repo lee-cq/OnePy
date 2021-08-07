@@ -6,18 +6,25 @@
 @Date-Time  : 2021/8/3 23:41
 """
 from json import dumps as _dumps
-from common.zip_str import PathCompress as _Path
+from pathlib import Path as _Path
 
-# from dotenv import get_key
-
+# 所有的路径务必使用Path封装一次
+# 代码的基础路径
 BASE_PATH_CODE = _Path(__file__).absolute().parent
+# 项目资源的基础路径
 BASE_PATH_FS = _Path(__file__).absolute().parent
 
+# 缓存Token的路径
 PATH_TOKEN_CACHE = BASE_PATH_FS.joinpath('.cache_token')
 PATH_TOKEN_CACHE.mkdir(mode=0o700, parents=True, exist_ok=True)
-PATH_UT_RESOURCES = BASE_PATH_FS / 'utest' / 'resources'
 
+# 单元测试资源文件路径
+PATH_UT_RESOURCES = BASE_PATH_CODE / 'utest' / 'resources'
+
+# 环境变量存放地址
 FILE_ENV_MSAL_CLIENT = BASE_PATH_FS / '.env_msal'
+
+# 项目配置的基础路径
 FILE_CONF_JSON = BASE_PATH_FS / 'conf.json'
 
 

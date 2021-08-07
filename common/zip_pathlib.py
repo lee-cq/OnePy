@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 # -*- coding: utf-8 -*-
 """
-@File Name  : zip_str
+@File Name  : zip_pathlib
 @Author     : LeeCQ
 @Date-Time  : 2021/8/5 20:07
 
@@ -11,6 +11,8 @@ import os
 from typing import Optional
 from zlib import compress, decompress
 from pathlib import Path, WindowsPath as _WindowsPath, PosixPath as _PosixPath
+
+from ext import OneException
 
 
 class PathCompress(Path):
@@ -40,7 +42,7 @@ class PathCompress(Path):
         _bit = self.read_bytes(decompress_=True)
         try:
             return _bit.decode(**{"encoding": encoding} if encoding else {})
-        except:
+        except (SyntaxError, LookupError, TypeError):
             return _bit
 
     # noinspection PyTypeChecker
@@ -64,8 +66,8 @@ class PathCompress(Path):
             if decompress_:
                 return decompress(_data)
             else:
-                raise Exception()
-        except Exception:
+                raise OneException()
+        except OneException:
             return _data
 
     def read_text(self, encoding: Optional[str] = None, errors: Optional[str] = None, decompress_=False) -> str:
