@@ -11,7 +11,7 @@ from zlib import decompress, compress
 
 from config import PATH_UT_RESOURCES
 from common import get_conf as _get_conf, set_conf as _set_conf
-from common import PathCompress
+from common.zip_pathlib import PathCompress
 
 conf_json = PATH_UT_RESOURCES / 'conf.json'
 
@@ -34,16 +34,24 @@ class CommonConf(unittest.TestCase):
             '{"disks": {"disk1": {"Client_ID": "aa", "Client_Sea": "bb", "token_cache": "cc"}},"lists": ["a", "b"]}')
 
     def test_11_get_str(self):
+        """获取已经存在的键"""
         a = get_conf('disks.disk1.Client_ID', file=self.conf_json)
         self.assertEqual('aa', a, )
 
     def test_12_get_dict(self):
+        """获取值类型 dict"""
         a = get_conf('disks.disk1', file=self.conf_json)
         self.assertIsInstance(a, dict, f'类型错误实际为:{type(a)}, 期待 dict')
 
     def test_13_get_list(self):
+        """获取值类型 list"""
         a = get_conf('lists', file=self.conf_json)
         self.assertIsInstance(a, list, f'类型错误实际为:{type(a)}, 期待 list')
+
+    def test_14_get_null(self):
+        """获取一个不存在的键"""
+        a = get_conf('u_null')
+        self.assertEqual(None, a, )
 
     def test_21_set_str(self):
         """改变一个键"""

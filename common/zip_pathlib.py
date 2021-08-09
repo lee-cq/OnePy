@@ -11,8 +11,11 @@ import os
 from typing import Optional
 from zlib import compress, decompress
 from pathlib import Path, WindowsPath as _WindowsPath, PosixPath as _PosixPath
+from dotenv import load_dotenv
 
 from ext import OneException
+
+load_dotenv()
 
 
 class PathCompress(Path):
@@ -78,11 +81,15 @@ class PathCompress(Path):
 
     def write_conf(self, data):
         """写配置文件"""
-        return self.write_text(data, encoding='gb18030', compress_=True, level=9)
+        return self.write_text(data,
+                               encoding='gb18030',
+                               compress_=False if os.environ.get('FLASK_DEBUG', False) else True,
+                               level=9)
 
     def read_conf(self):
         """读配置文件"""
-        return self.read_text(decompress_=True, encoding='gb18030')
+        return self.read_text(decompress_=False if os.environ.get('FLASK_DEBUG', False) else True,
+                              encoding='gb18030')
 
 
 class WindowsPath(_WindowsPath, PathCompress):

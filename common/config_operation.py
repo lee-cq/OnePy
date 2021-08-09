@@ -7,7 +7,7 @@
 """
 import json
 
-from common import PathCompress
+from common.zip_pathlib import PathCompress
 from config import FILE_CONF_JSON
 
 
@@ -48,6 +48,9 @@ def set_conf(key, value, file=FILE_CONF_JSON):
         else:
             return _value
     file = PathCompress(file)
+    if key == '*':
+        return file.write_conf(json.dumps(value, ensure_ascii=False, default=json_default_replace, indent=2))
+
     conf_dict = json.loads(file.read_conf())
     new_conf = _set_conf(key, value, conf_dict)
     return file.write_conf(

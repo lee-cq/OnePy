@@ -11,6 +11,10 @@ class OneException(Exception):
     """Base Exception """
 
 
+class NotInstallError(OneException):
+    """未安装"""
+
+
 class DiskErrorBase(OneException):
     """ Disk对象Error"""
 

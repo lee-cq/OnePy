@@ -3,6 +3,9 @@
 /test.mmd
 .env*
 .cache*
+.installed
+.cache_token/
+conf.json
 
 
 # Byte-compiled / optimized / DLL files

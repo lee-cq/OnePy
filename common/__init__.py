@@ -12,7 +12,7 @@ __BASE__ = __Path(__file__).parent.absolute()
 sys.path.append(str(__BASE__))
 
 from config_operation import set_conf, get_conf
-from zip_pathlib import PathCompress
+# from zip_pathlib import PathCompress
 
 SUCCESS = 0
 FAIL = -1

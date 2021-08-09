@@ -22,10 +22,17 @@ PATH_TOKEN_CACHE.mkdir(mode=0o700, parents=True, exist_ok=True)
 PATH_UT_RESOURCES = BASE_PATH_CODE / 'utest' / 'resources'
 
 # 环境变量存放地址
-FILE_ENV_MSAL_CLIENT = BASE_PATH_FS / '.env_msal'
+FILE_ENV_MSAL_CLIENT = BASE_PATH_FS / '.env'
 
 # 项目配置的基础路径
 FILE_CONF_JSON = BASE_PATH_FS / 'conf.json'
+
+conf_json = {
+    'username': '',
+    'password': '',
+    "SECRET_KEY": '',
+    "disks": {}
+}
 
 
 class _MASLToken:

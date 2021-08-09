@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="{{ url_for('static' ,filename="js/jquery-3.3.1.min.js") }}"></script>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static' ,filename="css/toastr.min.css") }}"/>
+    <script src="{{ url_for('static' ,filename="js/toastr.min.js") }}"></script>
+    <title>登录</title>
+</head>
+
+<body>
+<label>用户名：<input type="text" id="username" name="username"></label><br>
+<label>密 码：<input type="password" id="password" name="password"></label><br>
+<input type="button" value="登录" onclick="login()">
+<script>
+    function login() {
+        var formdata = {
+            "username": $("#username").val(),
+            "password": $("#password").val(),
+        }
+        $.ajax({
+            url: "#",
+            type: "POST",
+            data: JSON.stringify(formdata),
+            dataType: "json",
+            contentType: "application/json",
+            success: function (result) {
+                if (result.result == "OK") {
+                    toastr["success"]("登录成功")
+                    setTimeout(next_url(result.next_url), 3000);
+                } else if (result.result == "NO") {
+                    toastr["error"](result.msg)
+                }
+            },
+            error: function () {
+                toastr["error"]("网络连接失败");
+            }
+        })
+    }
+
+    function next_url(url) {
+        window.location.href = url;
+    }
+</script>
+</body>
+
+</html>
