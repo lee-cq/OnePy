@@ -34,4 +34,4 @@ def create_app():
 
 if __name__ == '__main__':
     a = create_app()
-    a.run()
+    a.run(host='localhost', port=8081)
