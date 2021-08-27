@@ -8,7 +8,7 @@
 import json
 from dataclasses import dataclass
 
-from flask import Blueprint, current_app, g, redirect, url_for
+from flask import Blueprint
 from flask import request, render_template
 from flask_login import LoginManager, login_required, login_user, UserMixin
 
@@ -59,7 +59,7 @@ def login():
 
 @admin.route('/')
 @login_required
-def admin_index():
+def index():
     return 'Hello, Admin'
 
 
@@ -69,7 +69,19 @@ def set_client():
     pass
 
 
-@admin.route('/getToken')
+@admin.route('/add-disk')
 @login_required
-def get_token():
-    pass
+def add_disk_index():
+    return render_template('add_disk.html')
+
+
+@admin.route('/add-disk/<name>', methods=['POST'])
+@login_required
+def add_disk(name):
+    """
+
+    @param name: 磁盘类型
+    """
+    if name == 'onedrive':
+        from ._token import view
+        return view()

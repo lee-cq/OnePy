@@ -34,20 +34,11 @@ conf_json = {
     "disks": {}
 }
 
-
-class _MASLToken:
-    """默认的配置"""
-    AUTHORITY = "https://login.microsoftonline.com/organizations"
-    REDIRECT_PATH = "/getAToken"
-    SCOPE = ["User.ReadBasic.All", "Files.ReadWrite.All", "Sites.ReadWrite.All"]
-    SESSION_TYPE = "filesystem"
-    CLIENT_ID = ''
-    CLIENT_SECRET = ''
-
-    @classmethod
-    def dict(cls):
-        return {k: v for k, v in cls.__dict__.items() if not k.startswith('__')}
-
-    @classmethod
-    def __str__(cls):
-        return _dumps(cls.dict())
+msal_info = {
+    'AUTHORITY': 'https://login.microsoftonline.com/organizations',
+    'REDIRECT_PATH': '/getAToken',
+    'SCOPES': ['User.ReadBasic.All', 'Files.ReadWrite.All', 'Sites.ReadWrite.All'],
+    'SESSION_TYPE': 'filesystem',
+    'CLIENT_ID': '',
+    'CLIENT_SECRET': ''
+}
