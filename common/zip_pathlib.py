@@ -59,7 +59,10 @@ class PathCompress(Path):
 
     def write_text(self, data: str, encoding=None, errors=None, compress_=False, level=9) -> int:
 
-        return self.write_bytes(data.encode(encoding=encoding), compress_=compress_, level=level, errors=errors)
+        return self.write_bytes(data.encode(**{"encoding": encoding} if encoding else {}),
+                                compress_=compress_,
+                                level=level,
+                                errors=errors)
 
     def read_bytes(self, decompress_=False, errors=None) -> bytes:
         """读取字节"""
