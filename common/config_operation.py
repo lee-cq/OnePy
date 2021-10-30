@@ -13,7 +13,7 @@ from config import FILE_CONF_JSON
 
 def get_conf(key: str, file=FILE_CONF_JSON) -> [dict, str, int, float, bool, None]:
     """从配置文件中拿取一个配置"""
-    file = PathCompress(file)
+    file = PathCompress(file if file else FILE_CONF_JSON)
     conf_dict = json.loads(file.read_conf())
     if key == '*':  # 允许查询全部的内容
         return conf_dict
@@ -36,7 +36,7 @@ def json_default_replace(_in):
                     f'\n将其转换为 dict, str, int, float, bool, None 的一种. ')
 
 
-def set_conf(key, value, file=FILE_CONF_JSON):
+def set_conf(key, value, rewrite=False, file=FILE_CONF_JSON):
     """设置一个键到conf.json"""
 
     def _set_conf(_key: [str, list], _value, _dict):
@@ -47,7 +47,8 @@ def set_conf(key, value, file=FILE_CONF_JSON):
             return _dict
         else:
             return _value
-    file = PathCompress(file)
+
+    file = PathCompress(file if file else FILE_CONF_JSON)
     if key == '*':
         return file.write_conf(json.dumps(value, ensure_ascii=False, default=json_default_replace, indent=2))
 
@@ -55,7 +56,7 @@ def set_conf(key, value, file=FILE_CONF_JSON):
     new_conf = _set_conf(key, value, conf_dict)
     return file.write_conf(
         json.dumps(new_conf, ensure_ascii=False, default=json_default_replace, indent=2)
-        )
+    )
 
 
 if __name__ == '__main__':

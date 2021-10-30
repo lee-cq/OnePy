@@ -31,7 +31,8 @@ class CommonConf(unittest.TestCase):
 
     def setUp(self) -> None:
         self.conf_json.write_text(
-            '{"disks": {"disk1": {"Client_ID": "aa", "Client_Sea": "bb", "token_cache": "cc"}},"lists": ["a", "b"]}')
+            '{"disks": {"disk1": {"Client_ID": "aa", "Client_Sea": "bb", "token_cache": "cc"}},"lists": ["a", "b"]}'
+        )
 
     def test_11_get_str(self):
         """获取已经存在的键"""

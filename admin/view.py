@@ -83,5 +83,5 @@ def add_disk(name):
     @param name: 磁盘类型
     """
     if name == 'onedrive':
-        from ._token import view
+        from .ms_token import view
         return view()

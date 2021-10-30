@@ -40,5 +40,6 @@ msal_info = {
     'SCOPES': ['User.ReadBasic.All', 'Files.ReadWrite.All', 'Sites.ReadWrite.All'],
     'SESSION_TYPE': 'filesystem',
     'CLIENT_ID': '',
-    'CLIENT_SECRET': ''
+    'CLIENT_SECRET': '',
+    'DRIVE_TYPE': 'onedrive',
 }
