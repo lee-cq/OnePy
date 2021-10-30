@@ -11,6 +11,10 @@ class OneException(Exception):
     """Base Exception """
 
 
+class DiskTagException(OneException):
+    """Tag名称不合法"""
+
+
 class NotInstallError(OneException):
     """未安装"""
 

@@ -7,7 +7,7 @@
 """
 from flask import Blueprint
 
-from ._token import get_token as _get_token
+from .ms_token import get_token as _get_token
 
 root = Blueprint('root', __name__, url_prefix='/')
 
